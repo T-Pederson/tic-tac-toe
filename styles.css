@@ -72,7 +72,7 @@ h1 {
     align-items: center;
 }
 
-h3 {
+h2 {
     color:white;
     font-size: 3em;
     font-weight: bold;
@@ -86,4 +86,16 @@ button {
     border: 2px solid white;
     background-color: black;
     cursor: pointer;
+}
+
+@media (max-width: 699px) {
+    .gameboard {
+        height: 300px;
+        width: 300px;
+    }
+
+    h1,
+    h2 {
+        font-size: 2em;
+    }
 }

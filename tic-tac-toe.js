@@ -1,35 +1,32 @@
 // Store the gameboard as an array inside of a gameboard object (use module)
 const gameboard = (() => {
     let array = ["", "", "", "", "", "", "", "", ""];
+    // Add updateGameboard function
     return {array};
 })();
 
 // Store players as objects (use factory)
-const player = (marker) => {
+const player = (marker, name) => {
     const getMarker = () => marker;
+    // const getName = () => name;
     return {getMarker};
 };
 
 // Create an object to control the flow of the game itself (use module)
 const game = (() => {
-    // Let currentPlayer = 'x'
-    // Set up event listeners to run function for a turn (fires when a player clicks a space)
-    // turn(currentPlayer)
-        // populateSpace(space, currentPlayer)
-        // winCheck(array)
-            // Read array for win patterns
-            // If no win
-                // change current turn variable to other player
-    // Else if win end game
-    // Display winner
-    // Display reset button
+    // Set up event listeners on spaces to let players take turns
+    // Set up event listener on reset button
+    // Add turn function
+    // Add winCheck function
+    // Add reset function
+    // Add changePlayer function
 })();
 
 
 
 
 
-// ----------------------- Logic to make game work outside of modules -----------------------
+// ----------------------- Logic to make game work outside of modules/factories -----------------------
 
 // Let x's go first
 let currentPlayer = 'x';
@@ -42,7 +39,7 @@ document.querySelector("#reset").addEventListener("click", reset);
 
 // Run through a player's turn
 function turn(space) {
-    // Place marker on selected space
+    // Check if space is open, if so place current player's marker on space
     if (space.currentTarget.innerText == '') {
         space.currentTarget.innerText = currentPlayer;
     } else {

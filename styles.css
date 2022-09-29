@@ -88,7 +88,7 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 699px) {
+@media (max-width: 700px), (max-height: 1100px) {
     .gameboard {
         height: 300px;
         width: 300px;

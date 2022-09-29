@@ -37,23 +37,6 @@ h1 {
     flex: 0 0 0;
 }
 
-h2 {
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.player1,
-.player2 {
-    align-self: flex-end;
-}
-
-.x,
-.o {
-    align-self: flex-start;
-    font-size: 4em;
-}
-
 .container {
     height: 60vh;
     width: 100vw;

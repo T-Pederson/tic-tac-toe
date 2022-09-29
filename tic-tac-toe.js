@@ -34,16 +34,20 @@ const game = (() => {
 // Let x's go first
 let currentPlayer = 'x';
 
-// Add event listeners to each space to let players take turns
+// Allow for players to click spaces and take turns
 document.querySelectorAll(".space").forEach(item => { item.addEventListener("click", turn); });
 
-// Add event listener to reset button
+// Make reset button work
 document.querySelector("#reset").addEventListener("click", reset);
 
 // Run through a player's turn
 function turn(space) {
     // Place marker on selected space
-    space.currentTarget.innerText = currentPlayer;
+    if (space.currentTarget.innerText == '') {
+        space.currentTarget.innerText = currentPlayer;
+    } else {
+        return;
+    }
     // Update the gameboard array to match the current display
     updateGameboard();
     // If no win, change current player
@@ -65,9 +69,8 @@ function winCheck(array) {
     array[0] == 'x' && array[4] == 'x' && array[8] == 'x' ||
     array[2] == 'x' && array[4] == 'x' && array[6] == 'x'
     ) {
-        // remove event listeners that allow for turns
+        // remove event listeners that allow for turns and display x as winner
         document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
-        // display x as the winner
         document.querySelector('h3').innerText = "x wins!";
         return true;
     } 
@@ -82,24 +85,36 @@ function winCheck(array) {
     array[0] == 'o' && array[4] == 'o' && array[8] == 'o' ||
     array[2] == 'o' && array[4] == 'o' && array[6] == 'o'
     ) { 
-        // remove event listeners that allow for turns
+        // remove event listeners that allow for turns and display o as winner
         document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
-        // display o as the winner
         document.querySelector('h3').innerText = "o wins!";
+        return true;
+    } 
+    // else if tie
+    else if (
+        array[0] != '' && 
+        array[1] != '' && 
+        array[2] != '' && 
+        array[3] != '' && 
+        array[4] != '' && 
+        array[5] != '' && 
+        array[6] != '' && 
+        array[7] != '' && 
+        array[8] != ''
+    ) {
+        // remove event listeners that allow for turns and display tie
+        document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
+        document.querySelector('h3').innerText = "It's a tie!";
         return true;
     }
 }
 
+// Clear display, reset gameboard.array, change to x's turn, and add event listeners for turns back to spaces
 function reset() {
-    // clear gameboard
     document.querySelectorAll(".space").forEach(item => { item.innerText = ""; })
-    // reset gameboard array
     updateGameboard();
-    // change bottom text to x's turn
     document.querySelector('h3').innerText = "x's turn...";
-    // change current player variable to x
     currentPlayer = 'x';
-    // add event listeners back to spaces
     document.querySelectorAll(".space").forEach(item => { item.addEventListener("click", turn); });
 }
 

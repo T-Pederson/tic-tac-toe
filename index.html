@@ -13,16 +13,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <h1>Tic-Tac-Toe</h1>
+        <h2 class="player1">Player 1</h2>
+        <h2 class="player2">Player 2</h2>
+        <h2 class="x">x</h2>
+        <h2 class="o">o</h2>
+    </div>
+
     <div class="container">
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
+        <div class="gameboard">
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3 class="current_turn">Player 1's turn...</h3>
+        <button id="reset">Reset</button>
     </div>
 </body>
 </html>

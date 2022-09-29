@@ -11,9 +11,6 @@ const player = (number, character) => {
     return {getNumber, getCharacter};
 };
 
-const player1 = player(1, 'x');
-const player2 = player(2, 'o');
-
 // Create an object to control the flow of the game itself (use module)
 const game = (() => {
     // Display start game button
@@ -29,7 +26,7 @@ const game = (() => {
 
 
 // Function to populate the gameboard based on player and what space was clicked
-function populateGameboard (space) {
+function populateGameboard(space) {
     // Need to fix this to detect current player rather than just x
     space.currentTarget.innerText = "x";
     const spaces = document.querySelectorAll(".space");

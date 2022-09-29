@@ -111,4 +111,8 @@ button {
     body {
         justify-content: center;
     }
+
+    .space {
+        font-size: 4.5em;
+    }
 }

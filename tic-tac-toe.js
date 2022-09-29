@@ -68,7 +68,7 @@ function winCheck(array) {
     ) {
         // remove event listeners that allow for turns and display x as winner
         document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
-        document.querySelector('h3').innerText = "x wins!";
+        document.querySelector('h2').innerText = "x wins!";
         return true;
     } 
     // else if o's win
@@ -84,7 +84,7 @@ function winCheck(array) {
     ) { 
         // remove event listeners that allow for turns and display o as winner
         document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
-        document.querySelector('h3').innerText = "o wins!";
+        document.querySelector('h2').innerText = "o wins!";
         return true;
     } 
     // else if tie
@@ -101,7 +101,7 @@ function winCheck(array) {
     ) {
         // remove event listeners that allow for turns and display tie
         document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
-        document.querySelector('h3').innerText = "It's a tie!";
+        document.querySelector('h2').innerText = "It's a tie!";
         return true;
     }
 }
@@ -110,7 +110,7 @@ function winCheck(array) {
 function reset() {
     document.querySelectorAll(".space").forEach(item => { item.innerText = ""; })
     updateGameboard();
-    document.querySelector('h3').innerText = "x's turn...";
+    document.querySelector('h2').innerText = "x's turn...";
     currentPlayer = 'x';
     document.querySelectorAll(".space").forEach(item => { item.addEventListener("click", turn); });
 }
@@ -119,10 +119,10 @@ function reset() {
 function changePlayer() {
     if (currentPlayer == 'x') {
         currentPlayer = 'o';
-        document.querySelector("h3").innerText = "o's turn...";
+        document.querySelector("h2").innerText = "o's turn...";
     } else {
         currentPlayer = 'x';
-        document.querySelector("h3").innerText = "x's turn...";
+        document.querySelector("h2").innerText = "x's turn...";
     }
 }
 

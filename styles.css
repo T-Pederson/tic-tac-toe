@@ -98,4 +98,17 @@ button {
     h2 {
         font-size: 2em;
     }
+
+    .header,
+    .footer {
+        height: 10vh;
+    }
+
+    .container {
+        height: 40vh;
+    }
+
+    body {
+        justify-content: center;
+    }
 }

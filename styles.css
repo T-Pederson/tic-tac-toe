@@ -110,6 +110,7 @@ button {
 
     body {
         justify-content: space-around;
+        height: 80vh;
     }
 
     .space {

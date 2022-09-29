@@ -21,7 +21,7 @@ body {
     gap: 8px;
 }
 
-.marker {
+.space {
     background-color: black;
     display: flex;
     justify-content: center;

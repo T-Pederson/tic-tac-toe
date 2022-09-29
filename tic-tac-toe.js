@@ -35,9 +35,7 @@ const game = (() => {
 let currentPlayer = 'x';
 
 // Add event listeners to each space to let players take turns
-document.querySelectorAll(".space").forEach(item => {
-    item.addEventListener("click", turn);
-})
+document.querySelectorAll(".space").forEach(item => { item.addEventListener("click", turn); });
 
 // Add event listener to reset button
 document.querySelector("#reset").addEventListener("click", reset);
@@ -48,11 +46,8 @@ function turn(space) {
     space.currentTarget.innerText = currentPlayer;
     // Update the gameboard array to match the current display
     updateGameboard();
-    // check for a win
-    if (winCheck(gameboard.array)) {
-        return;
-    } else {
-        // else if no win, change current player
+    // If no win, change current player
+    if (!(winCheck(gameboard.array))) {
         changePlayer();
     }
 }
@@ -70,10 +65,8 @@ function winCheck(array) {
     array[0] == 'x' && array[4] == 'x' && array[8] == 'x' ||
     array[2] == 'x' && array[4] == 'x' && array[6] == 'x'
     ) {
-        // remove event listeners to allow for turns
-        document.querySelectorAll(".space").forEach(item => {
-            item.removeEventListener("click", turn);
-        });
+        // remove event listeners that allow for turns
+        document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
         // display x as the winner
         document.querySelector('h3').innerText = "x wins!";
         return true;
@@ -89,10 +82,8 @@ function winCheck(array) {
     array[0] == 'o' && array[4] == 'o' && array[8] == 'o' ||
     array[2] == 'o' && array[4] == 'o' && array[6] == 'o'
     ) { 
-        // remove event listeners to allow for turns
-        document.querySelectorAll(".space").forEach(item => {
-            item.removeEventListener("click", turn);
-        });
+        // remove event listeners that allow for turns
+        document.querySelectorAll(".space").forEach(item => { item.removeEventListener("click", turn); });
         // display o as the winner
         document.querySelector('h3').innerText = "o wins!";
         return true;
@@ -101,9 +92,7 @@ function winCheck(array) {
 
 function reset() {
     // clear gameboard
-    document.querySelectorAll(".space").forEach(item => {
-        item.innerText = "";
-    })
+    document.querySelectorAll(".space").forEach(item => { item.innerText = ""; })
     // reset gameboard array
     updateGameboard();
     // change bottom text to x's turn
@@ -111,9 +100,7 @@ function reset() {
     // change current player variable to x
     currentPlayer = 'x';
     // add event listeners back to spaces
-    document.querySelectorAll(".space").forEach(item => {
-        item.addEventListener("click", turn);
-    })
+    document.querySelectorAll(".space").forEach(item => { item.addEventListener("click", turn); });
 }
 
 // Change current player after player takes a turn

@@ -118,12 +118,14 @@ input:focus {
 
     h1 {
         font-size: 2em;
-        margin-top: 48px;
     }
 
-    .header,
-    .footer {
+    .header {
         height: 10vh;
+    }
+
+    .footer {
+        height: 30vh;
     }
 
     .container {
@@ -131,8 +133,7 @@ input:focus {
     }
 
     body {
-        justify-content: space-between;
-        height: 80vh;
+        height: auto;
     }
 
     .space {

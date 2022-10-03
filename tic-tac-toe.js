@@ -106,8 +106,8 @@ const player = (marker, name) => {
 // Create an object to control the flow of the game itself (use module)
 const game = (() => {
     // Set up players
-    let player1 = player("x", 'Tyson');
-    let player2 = player("o", 'Bloobs');
+    let player1 = player("x", 'x');
+    let player2 = player("o", 'o');
     let currentPlayer = player1;
     let spaces = document.querySelectorAll(".space");
     let statusText = document.querySelector("h2");

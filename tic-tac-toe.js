@@ -1,9 +1,12 @@
+// Set up global variables that all modules/factories need
+const spaces = document.querySelectorAll(".space");
+const statusText = document.querySelector('h2');
+
 // Store the gameboard as an array inside of a gameboard object (use module)
 const gameboard = (() => {
     let array = ["", "", "", "", "", "", "", "", ""];
     const update = space => {
         // Generate an updated array of all current display spaces
-        let spaces = document.querySelectorAll(".space");
         let spacesArray = [].slice.call(spaces, 0);
         // Find the index number of the space that the player just clicked
         let chosenSpace = spacesArray.indexOf(space);
@@ -16,8 +19,6 @@ const gameboard = (() => {
     };
     // check for a win, if someone wins stop the game and congratulate winner
     const winCheck = () => {
-        let spaces = document.querySelectorAll(".space");
-        let statusText = document.querySelector('h2');
         // if x's win
         if (
         array[0] == 'x' && array[1] == 'x' && array[2] == 'x' ||
@@ -72,10 +73,9 @@ const gameboard = (() => {
     };
     // Erase all markers, reset array to all blank, reset status text to player 1's turn, change current player to player 1, and re-add all turn event listeners 
     const reset = () => {
-        let spaces = document.querySelectorAll(".space");
         spaces.forEach(item => { item.innerText = ""; });
         array = ["", "", "", "", "", "", "", "", ""];
-        document.querySelector('h2').innerText = `${game.player1.getName()}'s turn...`;
+        statusText.innerText = `${game.player1.getName()}'s turn...`;
         game.currentPlayer = game.player1;
         spaces.forEach(item => { item.addEventListener("click", game.currentPlayer.turn); });
     };
@@ -109,8 +109,6 @@ const game = (() => {
     let player1 = player("x", 'x');
     let player2 = player("o", 'o');
     let currentPlayer = player1;
-    let spaces = document.querySelectorAll(".space");
-    let statusText = document.querySelector("h2");
     statusText.innerText = `${currentPlayer.getName()}'s turn...`;
     // Set up event listeners on spaces to let players take turns
     spaces.forEach(item => { item.addEventListener("click", currentPlayer.turn); });

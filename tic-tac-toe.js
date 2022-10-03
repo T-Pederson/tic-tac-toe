@@ -1,8 +1,10 @@
 // Set up global variables that all modules/factories need
 const spaces = document.querySelectorAll('.space');
-const statusText = document.querySelector('h2');
+const statusText = document.querySelector('.statusText');
 
-// Store the gameboard as an array inside of a gameboard object (use module)
+
+
+// Store the gameboard as an array inside of a gameboard object (module)
 const gameboard = (() => {
     let array = ['', '', '', '', '', '', '', '', ''];
     const update = space => {
@@ -17,6 +19,7 @@ const gameboard = (() => {
             spaces[i].innerText = array[i];
         }
     };
+
     // check for a win, if someone wins stop the game and congratulate winner
     const winCheck = () => {
         // if x's win
@@ -71,18 +74,21 @@ const gameboard = (() => {
             return false;
         }
     };
+
     // Erase all markers, reset array to all blank, reset status text to player 1's turn, change current player to player 1, and re-add all turn event listeners 
-    const reset = () => {
+    const playAgain = () => {
         spaces.forEach(item => { item.innerText = ''; });
         array = ['', '', '', '', '', '', '', '', ''];
         statusText.innerText = `${game.player1.getName()}'s turn...`;
         game.currentPlayer = game.player1;
         spaces.forEach(item => { item.addEventListener('click', game.currentPlayer.turn); });
     };
-    return {update, winCheck, reset};
+    return {update, winCheck, playAgain};
 })();
 
-// Store players as objects (use factory)
+
+
+// Store players as objects (factory)
 const player = (marker, name) => {
     // Allow a players name and marker to be referenced
     const getName = () => name;
@@ -103,30 +109,51 @@ const player = (marker, name) => {
     return {getName, getMarker, turn};
 };
 
-// Create an object to control the flow of the game itself (use module)
+
+
+// Create an object to control the flow of the game itself (module)
 const game = (() => {
-    // Set up players
-    let player1 = player('x', 'x');
-    let player2 = player('o', 'o');
-    let currentPlayer = player1;
-    statusText.innerText = `${currentPlayer.getName()}'s turn...`;
-    // Set up event listeners on spaces to let players take turns
-    spaces.forEach(item => { item.addEventListener('click', currentPlayer.turn); });
-    // Set up event listener on reset button
-    document.querySelector('#reset').addEventListener('click', gameboard.reset);
+    let player1;
+    let player2;
+    let currentPlayer;
+
+    const startGame = () => {
+        // Set up players, assign player 1 to current player, then update display to status text and play again button
+        let player1Name = document.querySelector('#player1').value;
+        let player2Name = document.querySelector('#player2').value;
+        if (player1Name.length < 1 || player2Name.length < 1) {
+            return;
+        }
+        game.player1 = player('x', player1Name);
+        game.player2 = player('o', player2Name);
+        game.currentPlayer = game.player1;
+        // Set up event listeners on spaces to let players take turns
+        spaces.forEach(item => { item.addEventListener('click', game.currentPlayer.turn); });
+        // Remove player name forms and replace with status text
+        statusText.innerText = `${game.currentPlayer.getName()}'s turn...`;
+        // Remove start button and add play again button
+        const button = document.querySelector('button');
+        button.innerText = 'Play Again';
+        button.removeEventListener('click', startGame);
+        button.addEventListener('click', gameboard.playAgain);
+    }
+
+    // Add event listener to start button
+    document.querySelector('#start').addEventListener('click', startGame);
+
     // Update event listeners to reflect new currentPlayer, update currentPlayer, and update statusText
     const changePlayer = () => {
         if (game.currentPlayer.getMarker() == 'x') {
             spaces.forEach(item => { item.removeEventListener('click', game.currentPlayer.turn); });
-            game.currentPlayer = player2;
-            statusText.innerText = `${player2.getName()}'s turn...`;
+            game.currentPlayer = game.player2;
+            statusText.innerText = `${game.player2.getName()}'s turn...`;
             spaces.forEach(item => { item.addEventListener('click', game.currentPlayer.turn); });
         } else {
             spaces.forEach(item => { item.removeEventListener('click', game.currentPlayer.turn); });
-            game.currentPlayer = player1;
-            statusText.innerText = `${player1.getName()}'s turn...`;
+            game.currentPlayer = game.player1;
+            statusText.innerText = `${game.player1.getName()}'s turn...`;
             spaces.forEach(item => { item.addEventListener('click', game.currentPlayer.turn); });
         }
     }
-    return {player1, player2, currentPlayer, changePlayer}
+    return {player1, player2, currentPlayer, changePlayer, statusText}
 })();
